@@ -1,0 +1,10 @@
+{
+  "name": "GoinGrabber",
+  "version_number": "1.0.0",
+  "website_url": "",
+  "description": "A simple mod to allow you or your opponent to catch the fist bump goin at the end of a match (only visible from your view)",
+  "dependencies": [
+	"LavaGang-MelonLoader-0.7.0",
+        "UlvakSkillz-RumbleModdingAPI-3.3.2"
+  ]
+}
