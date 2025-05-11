@@ -1,26 +1,7 @@
-﻿using Il2CppInterop.Runtime;
-using Il2CppInterop.Runtime.Injection;
-using Il2CppSystem.Reflection;
-using Il2CppRUMBLE.Players.Subsystems;
-using Il2CppRUMBLE.Players;
+﻿using Il2CppRUMBLE.Players.Subsystems;
 using MelonLoader;
-using RumbleModdingAPI;
-using System.Collections;
 using UnityEngine;
 using HarmonyLib;
-using Il2Cpp;
-using System.Data;
-using static RumbleModdingAPI.Calls.GameObjects.Map0.LightingAndEffects;
-using UnityEngine.VFX;
-using Il2CppRUMBLE.Pools;
-using System.Reflection;
-using UnityEngine.SceneManagement;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
-using Il2CppInterop.Runtime.Runtime;
-using Il2CppRUMBLE.Managers;
-
-
-
 
 namespace GoinGrabber
 {
@@ -36,13 +17,7 @@ namespace GoinGrabber
         public override void OnInitializeMelon()
         {
             Logger = LoggerInstance;
-            Logger.Msg("StoneMatchTracker: Initialized.");
-        }
-
-
-        public override void OnApplicationStart()
-        {
-            MelonLoader.MelonLogger.Msg("GoinGrabber Loaded!");
+            Logger.Msg("GoinGrabber: Initialized.");
         }
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
@@ -63,30 +38,19 @@ namespace GoinGrabber
 
         public override void OnUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && currentScene.Equals("Gym"))
-            {
-                GoinReplacerObject.GetComponent<GoinReplacer>().TossGoin();
-                ModResources.InstantiateFistbumpRing(gymGoinPosition);
-            }
-        }
-
-        public override void OnLateInitializeMelon()
-        {
-            Calls.onRoundEnded += matchEnded;
-        }
-
-        private void matchEnded()
-        {
-
+            //For Testing purposes only
+            //if (Input.GetKeyDown(KeyCode.Space) && currentScene.Equals("Gym"))
+            //{
+            //    GoinReplacerObject.GetComponent<GoinReplacer>().TossGoin();
+            //    ModResources.InstantiateFistbumpRing(gymGoinPosition);
+            //}
         }
 
         private static void InstantiateGoinReplacer(Vector3 position)
         {
-            Logger.Msg("Instantiating GoinReplacer at position: " + position);
             GoinReplacerObject = new GameObject("GoinReplacer");
             GoinReplacerObject.transform.position = position; // Set the position to the center of the scene
             GoinReplacerObject.AddComponent<GoinReplacer>();
-            MelonLogger.Msg("GoinReplacer Loaded!");
         }
 
         private static void AnimateGoinReplacer(Vector3 position)
@@ -114,8 +78,6 @@ namespace GoinGrabber
                 {
                     __instance.onFistBumpBonusSFX = null;
                 }
-
-                Logger.Msg($"Fist bump effects disabled on {__instance.gameObject.name}");
                 return true;
             }
         }

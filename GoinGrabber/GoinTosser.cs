@@ -109,8 +109,7 @@ namespace GoinGrabber
         private void OnTriggerEnter(Collider other)
         {
             if (isFalling || isHovering)
-            {
-                Core.Logger.Msg($"collider is on layer {LayerMask.LayerToName(other.gameObject.layer)}");   
+            {  
                 if (other.name.Equals("InteractionHandTrigger") && !caught)
                 {
                     catchPoint = ModResources.InstantiateCatchPoint(transform.position);
