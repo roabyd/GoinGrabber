@@ -24,7 +24,6 @@ namespace GoinGrabber
         {
             currentScene = sceneName;
             lookingForNewObjects = false;
-            Logger.Msg($"Scene loaded: {currentScene}");
 
             if (!ModResources.Initialized)
             {

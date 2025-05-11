@@ -39,9 +39,7 @@ namespace GoinGrabber
             int interactorLayer = 31;
 
             Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), interactorLayer, false);
-            Core.Logger.Msg("Enabled collisions between Default and Interactor.");
             Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("Floor"), false);
-            Core.Logger.Msg("Enabled collisions between Default and Floor.");
         }
 
         void Update()
@@ -138,9 +136,7 @@ namespace GoinGrabber
         private void CleanUpGameChanges()
         {
             Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("Interactor"), true);
-            Core.Logger.Msg($"Disabled collisions between Default and Interactor (Layer {LayerMask.NameToLayer("Interactor")})");
             Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("Floor"), true);
-            Core.Logger.Msg("Disabled collisions between Default and Floor.");
         }
     }
 }
