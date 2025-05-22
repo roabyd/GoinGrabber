@@ -2,6 +2,7 @@
 using MelonLoader;
 using UnityEngine;
 using HarmonyLib;
+using Il2CppRUMBLE.Managers;
 
 namespace GoinGrabber
 {
@@ -32,6 +33,7 @@ namespace GoinGrabber
             if (currentScene.Equals("Gym"))
             {
                 InstantiateGoinReplacer(gymGoinPosition);
+                CreateGoinInteractionObjects();
             }
         }
 
@@ -70,7 +72,8 @@ namespace GoinGrabber
                 // Disable the fist bump effects immediately when the object is initialized
                 if (__instance.onFistBumpBonusVFX != null)
                 {
-                    AnimateGoinReplacer(interactionPosition);     
+                    AnimateGoinReplacer(interactionPosition);
+                    CreateGoinInteractionObjects();
                     __instance.onFistBumpBonusVFX = null;
                 }
                 if (__instance.onFistBumpBonusSFX != null)
@@ -78,6 +81,26 @@ namespace GoinGrabber
                     __instance.onFistBumpBonusSFX = null;
                 }
                 return true;
+            }
+        }
+
+        private static void CreateGoinInteractionObjects()
+        {
+            Transform playerRightHand = PlayerManager.instance.localPlayer.Controller.transform.GetChild(0)
+                    .GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
+            Transform playerLeftHand = PlayerManager.instance.localPlayer.Controller.transform.GetChild(0)
+                .GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(1).GetChild(0).GetChild(0).GetChild(0);
+            ModResources.InstantiateHandSlapper(playerRightHand, true, true);
+            ModResources.InstantiateHandSlapper(playerLeftHand, true, false);
+
+            if (PlayerManager.instance.AllPlayers.Count > 1)
+            {
+                Transform remotePlayerRightHand = PlayerManager.instance.AllPlayers[1].Controller.transform.GetChild(0)
+                    .GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
+                Transform remotePlayerLeftHand = PlayerManager.instance.AllPlayers[1].Controller.transform.GetChild(0)
+                    .GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(1).GetChild(0).GetChild(0).GetChild(0);
+                ModResources.InstantiateHandSlapper(remotePlayerRightHand, false, true);
+                ModResources.InstantiateHandSlapper(remotePlayerLeftHand, false, false);
             }
         }
     }

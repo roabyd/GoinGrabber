@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using static RumbleModdingAPI.Calls.GameObjects.Gym.Tutorial.WorldTutorials.CombatCarvings;
+﻿using UnityEngine;
 
 namespace GoinGrabber
 {
@@ -52,6 +46,44 @@ namespace GoinGrabber
 
             fistbumpRing.name = "FistbumpRing";
             return fistbumpRing;
+        }
+
+        public static GameObject InstantiateHandSlapper(Transform parent, bool localPlayer, bool rightHand)
+        {
+            GameObject handSlapper = GameObject.Instantiate(Bundle.LoadAsset<GameObject>("HandSlapper"), parent);
+            handSlapper.name = "HandSlapper";
+            Transform catcher = handSlapper.transform.Find("GoinCatcher");
+            if (catcher != null)
+            {
+                string catcherName;
+                catcherName = localPlayer ? "local" : "remote";
+                catcherName += rightHand ? "RightCatcher" : "LeftCatcher";
+                catcher.name = catcherName;
+            }
+            if (!rightHand)
+            {
+                handSlapper.transform.localRotation = Quaternion.Euler(0, 165, 15);
+                Vector3 localPos = handSlapper.transform.localPosition;
+                localPos.x = -localPos.x;
+                handSlapper.transform.localPosition = localPos;
+            }
+            Transform slapper = handSlapper.transform.Find("SlapCollider");
+            if (slapper != null)
+            {
+                slapper.gameObject.AddComponent<HandVelocityTracker>();
+                string slapperName;
+                slapperName = localPlayer ? "local" : "remote";
+                slapperName += rightHand ? "RightSlapper" : "LeftSlapper";
+                slapper.name = slapperName;
+            }
+
+            //remove the visuals used for testing
+            Transform catcherVisual = handSlapper.transform.Find("VisualCapsule");
+            catcherVisual.gameObject.SetActive(false);
+            Transform slapperVisual = handSlapper.transform.Find("VisualHand");
+            slapperVisual.gameObject.SetActive(false);
+
+            return handSlapper;
         }
     }
 }

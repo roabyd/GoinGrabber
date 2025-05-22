@@ -4,6 +4,6 @@
     {
         public const string ModName = "GoinGrabber";
         public const string Author = "Roaby";
-        public const string ModVersion = "1.0.0";
+        public const string ModVersion = "1.2.0";
     }
 }

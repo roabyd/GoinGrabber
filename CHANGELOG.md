@@ -1,3 +1,9 @@
+# Version 1.2.0
+- Update the interaction to allow each player to physically catch or slap/punch the goin away
+- Goin will no long fall through the floor when dropped
+- Added haptic feedback in the controllers when catching/slapping the goin
+- Goin catch animation and sound effect will only play when the player touching the goin presses the grip button
+
 # Version 1.0.1
 - Removed Modding API Dependency
 
