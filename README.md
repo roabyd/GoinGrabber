@@ -1,6 +1,6 @@
 # GoinGrabber
 
-This mod replaces the fist bump reward goin at the end of a match with once that can be caught by the player. Players can now slap away the goin, or catch it with the grip button on the controller.
+This mod replaces the fist bump reward goin at the end of a match with one that can be caught by the player. Players can now slap away the goin, or catch it with the grip button on the controller.
 
 # Installation instructions
 - Head over to https://thunderstore.io/c/rumble/p/Roaby/GoinGrabber/ to download the files
