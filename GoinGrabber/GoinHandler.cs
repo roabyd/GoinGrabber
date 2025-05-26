@@ -7,14 +7,13 @@ using UnityEngine.XR;
 namespace GoinGrabber
 {
     [RegisterTypeInIl2Cpp]
-    internal class GoinTosser : MonoBehaviour
+    public class GoinHandler : MonoBehaviour
     {
         public float initialUpwardVelocity = 4f;
-        public float gravity = -9.81f;
+        public float tossGravity = -9.81f;
         public float spinSpeed = 500f; // degrees per second
         public AudioSource flipAudioSource;
         public GameObject catchPoint;
-        public float velocityThreshold = -5f; // Threshold for falling velocity
         public float hoverDuration = 0.5f;
         private float hoverTimer = 0f;
         private bool isHovering = false;
@@ -43,9 +42,6 @@ namespace GoinGrabber
 
             flipAudioSource = gameObject.GetComponent<AudioSource>();
 
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("Default"), false);
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("CombatFloor"), false);
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("Floor"), false);
             if (PlayerManager.instance.AllPlayers.Count > 1)
             {
                 remotePlayerRightHand = PlayerManager.instance.AllPlayers[1].Controller.transform.GetChild(0)
@@ -72,7 +68,7 @@ namespace GoinGrabber
                     if (!isHovering)
                     {
                         // Apply gravity
-                        verticalVelocity += gravity * Time.deltaTime;
+                        verticalVelocity += tossGravity * Time.deltaTime;
 
                         // Move vertically
                         transform.position += Vector3.up * verticalVelocity * Time.deltaTime;
@@ -110,13 +106,13 @@ namespace GoinGrabber
             //Cleanup if goin makes it below the floor
             if (transform.position.y < -20 && !caught)
             {
-                Destroy(gameObject);
+                GoinManager.Instance.DestroyGoin(gameObject);
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (isFalling || isHovering)
+            if (!rb.isKinematic)
             {
                 if (other.name == "localRightCatcher" && Calls.ControllerMap.RightController.GetGrip() > 0.6)
                 {
@@ -141,7 +137,7 @@ namespace GoinGrabber
 
         private void OnTriggerStay(Collider other)
         {
-            if (isFalling || isHovering)
+            if (!rb.isKinematic)
             {
                 if (other.name == "localRightCatcher" && Calls.ControllerMap.RightController.GetGrip() > 0.6 &&
                     !localRightHandTriggerPressedEarly)
@@ -170,8 +166,8 @@ namespace GoinGrabber
 
         private void OnTriggerExit(Collider other)
         {
-            if (isFalling || isHovering)
-            {
+            if (!rb.isKinematic)
+            { 
                 if (other.name == "localRightCatcher")
                 {
                     localRightHandTriggerPressedEarly = false;
@@ -198,9 +194,8 @@ namespace GoinGrabber
             Destroy(catchPoint, catchPoint.GetComponent<AudioSource>().clip.length);
             isLaunched = false;
             isFalling = false;
-            Destroy(gameObject);
+            GoinManager.Instance.DestroyGoin(gameObject);
             caught = true;
-            CleanUpGameChanges();
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -232,13 +227,6 @@ namespace GoinGrabber
             flipAudioSource.Play();
             rb.isKinematic = true; // Start as kinematic to prevent physics interactions
             rb.useGravity = false;
-        }
-
-        private void CleanUpGameChanges()
-        {
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("Floor"), true);
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("CombatFloor"), true);
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("Default"), true);
         }
     }
 }
