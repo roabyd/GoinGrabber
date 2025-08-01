@@ -1,3 +1,6 @@
+# Version 1.2.1
+- Refactored mod to allow other mods to be built on top
+
 # Version 1.2.0
 - Update the interaction to allow each player to physically catch or slap/punch the goin away
 - Goin will no long fall through the floor when dropped

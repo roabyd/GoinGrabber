@@ -11,3 +11,4 @@ This mod replaces the fist bump reward goin at the end of a match with one that 
 
 
 If you have any ideas on how to add some unique flare to the catch, hit me up, i'm always open to suggestions! Also thank you KaJo for the inspiration to get working on this mod!
+I have also refactored the code to allow other mods to use the goin asset, hit me up in discord if you have any questions
