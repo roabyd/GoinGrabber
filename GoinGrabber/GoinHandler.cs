@@ -3,6 +3,7 @@ using MelonLoader;
 using Il2CppRUMBLE.Managers;
 using RumbleModdingAPI;
 using UnityEngine.XR;
+using RumbleModdingAPI.RMAPI;
 
 namespace GoinGrabber
 {
@@ -44,17 +45,17 @@ namespace GoinGrabber
 
             if (PlayerManager.instance.AllPlayers.Count > 1)
             {
-                remotePlayerRightHand = PlayerManager.instance.AllPlayers[1].Controller.transform.GetChild(0)
+                remotePlayerRightHand = PlayerManager.instance.AllPlayers[1].Controller.transform.GetChild(1)
                     .GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
-                remotePlayerLeftHand = PlayerManager.instance.AllPlayers[1].Controller.transform.GetChild(0)
+                remotePlayerLeftHand = PlayerManager.instance.AllPlayers[1].Controller.transform.GetChild(1)
                     .GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(1).GetChild(0).GetChild(0).GetChild(0);
                 remotePlayerRightMiddleFinger = remotePlayerRightHand.GetChild(0).GetChild(0);
                 //X rotation will be 72
                 remotePlayerLeftMiddleFinger = remotePlayerLeftHand .GetChild(0).GetChild(0);
             }
-            localPlayerRightHand = PlayerManager.instance.localPlayer.Controller.transform.GetChild(0)
+            localPlayerRightHand = PlayerManager.instance.localPlayer.Controller.transform.GetChild(1)
                 .GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
-            localPlayerLeftHand = PlayerManager.instance.localPlayer.Controller.transform.GetChild(0)
+            localPlayerLeftHand = PlayerManager.instance.localPlayer.Controller.transform.GetChild(1)
                 .GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(1).GetChild(0).GetChild(0).GetChild(0);
         }
 

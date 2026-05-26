@@ -79,18 +79,18 @@ namespace GoinGrabber
         private IEnumerator CreateGoinInteractionObjects()
         {
             yield return new WaitForSeconds(5f);
-            Transform playerRightHand = PlayerManager.instance.localPlayer.Controller.transform.GetChild(0)
+            Transform playerRightHand = PlayerManager.instance.localPlayer.Controller.transform.GetChild(1)
                     .GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
-            Transform playerLeftHand = PlayerManager.instance.localPlayer.Controller.transform.GetChild(0)
+            Transform playerLeftHand = PlayerManager.instance.localPlayer.Controller.transform.GetChild(1)
                 .GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(1).GetChild(0).GetChild(0).GetChild(0);
             ModResources.InstantiateHandSlapper(playerRightHand, true, true);
             ModResources.InstantiateHandSlapper(playerLeftHand, true, false);
 
             if (PlayerManager.instance.AllPlayers.Count > 1)
             {
-                Transform remotePlayerRightHand = PlayerManager.instance.AllPlayers[1].Controller.transform.GetChild(0)
+                Transform remotePlayerRightHand = PlayerManager.instance.AllPlayers[1].Controller.transform.GetChild(1)
                     .GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
-                Transform remotePlayerLeftHand = PlayerManager.instance.AllPlayers[1].Controller.transform.GetChild(0)
+                Transform remotePlayerLeftHand = PlayerManager.instance.AllPlayers[1].Controller.transform.GetChild(1)
                     .GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(1).GetChild(0).GetChild(0).GetChild(0);
                 ModResources.InstantiateHandSlapper(remotePlayerRightHand, false, true);
                 ModResources.InstantiateHandSlapper(remotePlayerLeftHand, false, false);

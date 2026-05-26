@@ -1,6 +1,7 @@
 ﻿using MelonLoader;
 using System.Reflection;
 using GoinGrabber;
+using BuildInfo = GoinGrabber.BuildInfo;
 
 [assembly: MelonInfo(typeof(Core), BuildInfo.ModName, BuildInfo.ModVersion, BuildInfo.Author)]
 [assembly: MelonGame("Buckethead Entertainment", "RUMBLE")]
