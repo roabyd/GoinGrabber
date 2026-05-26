@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using RumbleModdingAPI.RMAPI;
+using UnityEngine;
 
 namespace GoinGrabber
 {
     internal class ModResources
     {
-        public static Il2CppAssetBundle Bundle;
+        public static AssetBundle Bundle;
 
         public static GameObject GoinPrefab;
 
@@ -15,7 +16,7 @@ namespace GoinGrabber
         {
             if (initialized && !reload) return;
 
-            Bundle = Il2CppAssetBundleManager.LoadFromFile(@"UserData/goingrabberbundle");
+            Bundle = AssetBundles.LoadAssetBundleFromFile(@"UserData/goingrabberbundle");
 
             initialized = true;
         }
